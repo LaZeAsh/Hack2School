@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "discord.js";
 
-const data = new SlashCommandBuilder()
-    .setName('ping')
-    .setDescription('Replies with ping!');
+export const data = new SlashCommandBuilder()
+	.setName('ping')
+	.setDescription('Sends a random gif!')
