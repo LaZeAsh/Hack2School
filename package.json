@@ -1,0 +1,25 @@
+{
+  "name": "hacktooschool",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon && ts-node src/index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/rest": "^1.1.0",
+    "@google-cloud/storage": "^6.4.2",
+    "@google-cloud/vision": "^2.4.2",
+    "@types/node": "^18.7.14",
+    "discord.js": "^14.3.0",
+    "dotenv": "^16.0.2",
+    "fs": "^0.0.1-security",
+    "nodemon": "^2.0.19",
+    "path": "^0.12.7",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.2"
+  }
+}
