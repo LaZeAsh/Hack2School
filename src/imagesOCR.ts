@@ -6,16 +6,16 @@ const client = new vision.ImageAnnotatorClient({ keyFilename: 'src/gcloudKey.jso
 export async function getTextFromImage(url: string) {
     const [result] = await client.textDetection(url);
     const detections = result.textAnnotations;
-    console.log('Text:', detections);
     var content = ""
-    detections!.forEach(text => content += ' ');
-    console.log(content)
+    detections!.forEach(text => content += text.description + ' ');
+    writeData({'text': content},'c','test10')
 }
 
-export async function getObjects() {
-    const a = await readData('c', 'test3')
-    console.log(a)
+export async function getObjects(url: string) {
+    const a = await readData('c', 'test10')
+    // console.log(a)
+    return a
 }
 
-getTextFromImage('https://cdn.discordapp.com/attachments/1015392266866667581/1015775646896627812/unknown.png')
-getObjects()
+// getTextFromImage('https://cdn.discordapp.com/attachments/1015587106225131601/1015821292198445097/IMG_9853.jpg')
+// getObjects('')

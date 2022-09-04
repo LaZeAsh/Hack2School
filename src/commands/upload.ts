@@ -6,7 +6,7 @@ export const data = new SlashCommandBuilder()
     .addStringOption((option) => {
         option.setName('pdf')
             .setDescription('Image of the item')
-            
+            .setRequired(true)
         return option
     })
         

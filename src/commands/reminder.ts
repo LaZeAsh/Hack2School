@@ -6,11 +6,13 @@ export const data = new SlashCommandBuilder()
     .addStringOption((option) => {
         option.setName('duration')
             .setDescription('Duration of your reminder')
+            .setRequired(true)
         return option
     })
     .addStringOption((option) => {
         option.setName('reason')
             .setDescription('Reason to remind you for')
+            .setRequired(true)
         return option
     })
     

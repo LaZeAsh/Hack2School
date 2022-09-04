@@ -1,6 +1,8 @@
 import * as firestore from 'firebase-admin';
 import {app} from './index'
 
+
+
 export async function readData(collection: string, key: string) {
     let DATA = await firestore.firestore().collection(collection).doc(key).get();
     if(DATA.exists) {

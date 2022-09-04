@@ -5,7 +5,7 @@ dotenv.config();
 import fs from 'fs';
 import path from 'path'
 import ms from 'ms';
-import { getTextFromImage } from './imagesOCR'
+import { getTextFromImage, getObjects } from './imagesOCR'
 
 // Google Cloud
 // const vision = require('@google-cloud/vision').v1;
@@ -54,16 +54,18 @@ client.on('interactionCreate', async (interaction) => {
 
     if (interaction.commandName === "upload") {
         let img = interaction.options.getString('pdf');
-        console.log(img);
         getTextFromImage(img as string);
         interaction.reply("Worked!");
     }
 
     if (interaction.commandName === "notes") {
+        //@ts-ignore
+        const x: { text: string } = await getObjects('')
         let embed = new Discord.EmbedBuilder()
             .setTitle("Notes")
-            .setDescription("Notes")
-            .setColor("Aqua")
+            .setDescription(x.text.split("\n").join(""))
+            .setColor("Green")
+            .setTimestamp()
 
         
         interaction.reply({ embeds: [embed] })
