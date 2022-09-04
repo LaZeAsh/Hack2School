@@ -4,6 +4,8 @@ import dotenv from 'dotenv';
 dotenv.config();
 import fs from 'fs';
 import path from 'path'
+import ms from 'ms';
+import { getTextFromImage } from './imagesOCR'
 
 // Google Cloud
 // const vision = require('@google-cloud/vision').v1;
@@ -14,13 +16,13 @@ import path from 'path'
 const client = new Discord.Client({ intents: [Discord.GatewayIntentBits.Guilds] });
 
 client.once('ready', async (client) => {
-    
+
     const commands = [];
     const commandFiles = fs.readdirSync(path.resolve(__dirname, './commands')).filter(file => file.endsWith('.ts'));
     for (const file of commandFiles) {
         const command = require(`./commands/${file}`);
         commands.push(command?.data?.toJSON());
-        
+
     }
 
     const rest = new REST({ version: '10' }).setToken(process.env.TOKEN as string);
@@ -43,18 +45,51 @@ client.on('messageCreate', (message) => {
     console.log(message);
 });
 
-client.on('interactionCreate', async(interaction) => {
-    if(!interaction.isChatInputCommand()) return;
+client.on('interactionCreate', async (interaction) => {
+    if (!interaction.isChatInputCommand()) return;
 
-    if(interaction.commandName === "ping") {
+    if (interaction.commandName === "ping") {
         interaction.reply("Pong!");
     }
 
-    if(interaction.commandName === "upload") {
-        
+    if (interaction.commandName === "upload") {
+        let img = interaction.options.getString('pdf');
+        console.log(img);
+        getTextFromImage(img as string);
+        interaction.reply("Worked!");
     }
 
-	
+    if (interaction.commandName === "notes") {
+        let embed = new Discord.EmbedBuilder()
+            .setTitle("Notes")
+            .setDescription("Notes")
+            .setColor("Aqua")
+
+        
+        interaction.reply({ embeds: [embed] })
+    }
+
+    if (interaction.commandName === "reminder") {
+        let duration = interaction.options.getString('duration');
+        let reason = interaction.options.getString('reason');
+        let responseEmbed = new Discord.EmbedBuilder()
+            .setTitle("Reminder")
+            .setDescription(`Your reminder has been set for ${duration}`)
+            .setColor('Green')
+        
+        setTimeout(async function () {
+            let reminderEmbed = new Discord.EmbedBuilder()
+                .setTitle("Reminder")
+                .setDescription(`This is your reminder for ${reason}`)
+                .setColor("DarkAqua")
+            interaction.user.send({ embeds: [reminderEmbed] });
+        }, ms (duration as string))
+        
+        interaction.reply({ embeds: [responseEmbed] });
+
+
+    }
+    
 });
 
 
