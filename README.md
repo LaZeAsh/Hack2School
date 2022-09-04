@@ -1,4 +1,4 @@
-##💡 Inspiration💡
+## 💡 Inspiration💡
 - A lot of people (especially hackathon hackers) love using Discord. As long-time hackers, our team has used Discord for a long-time that it’s become second nature to on it almost constantly for communication and receiving news. However, Discord can distract us from doing school work. We wanted to mitigate this by reversing the effect; if Discord could help us as an educational tool, we get to use our loved app more productively. 
 - Discord was an easy place to keep all our stuff in one place
 
